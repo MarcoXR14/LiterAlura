@@ -1,12 +1,20 @@
 package com.example.LiterAlura;
 
 import com.example.LiterAlura.Principal.Principal;
+import com.example.LiterAlura.Repository.AutorRepository;
+import com.example.LiterAlura.Repository.LibroRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LiterAluraApplication implements CommandLineRunner {
+    @Autowired
+    private LibroRepository libroRepository;
+
+    @Autowired
+    private AutorRepository autorRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LiterAluraApplication.class, args);
@@ -14,7 +22,7 @@ public class LiterAluraApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Principal principal = new Principal();
+        Principal principal = new Principal(libroRepository, autorRepository);
         principal.mostrarMenu();
     }
 }
